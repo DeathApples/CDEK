@@ -1,0 +1,179 @@
+﻿<Window x:Class="Interface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Interface"
+        
+        WindowStartupLocation="CenterScreen"
+        Title="CDEK" Height="900" Width="1600" Loaded="Window_Loaded">
+
+    <TabControl x:Name="MainTabControl"  Margin="0, -7">
+
+        <TabItem x:Name="SearchTabItem" Visibility="Hidden">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+
+                <DataGrid Name="OrganizationDataGrid" Grid.Row="0" Margin="5" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="OrganizationDataGrid_MouseDoubleClick">
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="20" Content="+" Click="OpenFileButton_Click"></Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header=" Название организации" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header=" Город" Width="*" Binding="{Binding City}"/>
+                        <DataGridTextColumn Header=" ИНН" Width="*" Binding="{Binding INN}"/>
+                        <DataGridTextColumn Header=" Номер договора" Width="*" Binding="{Binding ContractNumber}"/>
+                        <DataGridTextColumn Header=" Дата договора" Width="*" Binding="{Binding ContractDate}"/>
+                        <DataGridTextColumn Header=" Адрес" Width="*" Binding="{Binding Address}"/>
+                        <DataGridTextColumn Header=" Сайт" Width="*" Binding="{Binding Website}"/>
+                        <DataGridTextColumn Header=" Емейл" Width="*" Binding="{Binding Email}"/>
+                        <DataGridTextColumn Header=" Тип ЭДО" Width="*" Binding="{Binding EDM}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+
+                    <TextBox x:Name="SearchTextBox" Height="25" Width="360" Margin="5, 0, 15, 10" FontSize="16" KeyDown="SearchTextBox_KeyDown"></TextBox>
+
+                    <Button x:Name="AddOrganizationButton" Height="25" Width="120" Margin="0, 0, 15, 10" Content="Добавить" Click="AddOrganizationButton_Click"></Button>
+                    <Button x:Name="DeleteOrganizationButton" Height="25" Width="120" Margin="0, 0, 15, 10" Content="Удалить" Click="DeleteOrganizationButton_Click"></Button>
+                    <Button x:Name="ExportButton" Height="25" Width="120" Margin="0, 0, 0, 10" Content="Экспорт" Click="ExportButton_Click"></Button>
+
+                </StackPanel>
+
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="OrganizationbTabItem" Visibility="Hidden">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition MinHeight="260" Height="2*"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="420">
+                    <TextBlock Text="Название организации" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="NameOrganizationTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                    <TextBlock Text="Город" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="CityTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                    <TextBlock Text="ИНН" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="INNTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                    <TextBlock Text="Номер договора" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="ContractNumberTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                    <TextBlock Text="Дата договора" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="ContractDateTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="420">
+                    <TextBlock Text="Адрес" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="AddressTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                    <TextBlock Text="Сайт" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="WebsiteTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                    <TextBlock Text="Емейл для доставки документов" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="EmailOrganizationTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                    <TextBlock Text="Тип ЭДО" Margin="8, 2"></TextBlock>
+                    <TextBox x:Name="EDMTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button x:Name="SaveOrganizationButton" Height="25" Width="120" Margin="0, 0, 15, 0" Content="Сохранить" Click="SaveOrganizationButton_Click"></Button>
+                    <Button x:Name="CancelOrganizationButton" Height="25" Width="120" Margin="0, 0, 5, 0" Content="Отмена" Click="CancelOrganizationButton_Click"></Button>
+                </StackPanel>
+
+                <TabControl x:Name="ContactAndReportTabControl" Grid.Row="2" Grid.ColumnSpan="2" Margin="5, 0, 5, 12">
+
+                    <TabItem Header="Контактные лица" FontSize="16">
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition MinWidth="450" Width="2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <DataGrid x:Name="ContactDataGrid" Margin="5" IsReadOnly="True" AutoGenerateColumns="False" FontSize="12">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header=" Контактное лицо" Width="*" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header=" Должность" Width="*" Binding="{Binding Post}"/>
+                                    <DataGridTextColumn Header=" Телефон" Width="*" Binding="{Binding NumberPhone}"/>
+                                    <DataGridTextColumn Header=" Емейл" Width="*" Binding="{Binding Email}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="420">
+                                <TextBlock Text="Контактное лицо" Margin="8, 2" FontSize="12"></TextBlock>
+                                <TextBox x:Name="NamePersonTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                                <TextBlock Text="Должность" Margin="8, 2" FontSize="12"></TextBlock>
+                                <TextBox x:Name="PostTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                                <TextBlock Text="Телефон" Margin="8, 2" FontSize="12"></TextBlock>
+                                <TextBox x:Name="NumberPhoneTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                                <TextBlock Text="Емейл" Margin="8, 2" FontSize="12"></TextBlock>
+                                <TextBox x:Name="EmailPersonTextBox" Height="25" Margin="0, 0, 0, 15" FontSize="16"></TextBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <Button x:Name="AddContactButton" Height="25" Width="120" Margin="0, 0, 15, 5" FontSize="12" Content="Добавить" Click="AddContactButton_Click"></Button>
+                                <Button x:Name="DeleteContactButton" Height="25" Width="120" Margin="0, 0, 5, 5" FontSize="12" Content="Удалить" Click="DeleteContactButton_Click"></Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Отчёты" FontSize="16">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Image x:Name="ExportReportsImage" Height="25" Width="25" Margin="0,0,15,0" Source="Resources/Excel.png" MouseLeftButtonUp="ExportReportsImage_MouseLeftButtonUp"></Image>
+                                <Image x:Name="AddReportImage" Height="25" Width="25" Margin="0,0,15,0" Source="Resources/Plus.png" MouseLeftButtonUp="AddReportImage_MouseLeftButtonUp"></Image>
+                                <TextBox x:Name="DateReport" Height="25" Width="240" Margin="0, 0, 15, 0" FontSize="16" HorizontalContentAlignment="Center"></TextBox>
+                                <ComboBox x:Name="ComboReport" Height="25" Width="250" Margin="0, 0, 5, 0" FontSize="16" HorizontalContentAlignment="Center" SelectionChanged="ComboReport_SelectionChanged"></ComboBox>
+                            </StackPanel>
+
+                            <Grid Grid.Row="1">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <RichTextBox x:Name="InfoBox" Grid.Row="0" Margin="5,0,5,5" VerticalScrollBarVisibility="Auto"></RichTextBox>
+
+                                <StackPanel  Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <Button x:Name="SaveReportButton" Height="25" Width="120" Margin="0, 5, 15, 5" FontSize="12" Content="Сохранить" Click="SaveReportButton_Click"></Button>
+                                    <Button x:Name="CancelReportButton" Height="25" Width="120" Margin="0, 5, 5, 5" FontSize="12" Content="Отмена" Click="CancelReportButton_Click"></Button>
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Grid>
+                    </TabItem>
+
+                </TabControl>
+
+            </Grid>
+        </TabItem>
+
+    </TabControl>
+</Window>
